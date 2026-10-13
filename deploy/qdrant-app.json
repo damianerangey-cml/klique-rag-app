@@ -1,0 +1,19 @@
+{
+  "app": "qdrant",
+  "notes": "Vector store on the Qdrant catalog app (Databases category). Field names from clearml_apps/db_apps/qdrant/qdrant.app.conf 1.17.3; the package is not among the app zips in suse-lab/apps-to-upload, so check that the app is installed. The app routes HTTP port 6333 through the application gateway and snapshots /qdrant/storage; to keep the index across a restart, launch a clone with continue_session set to the previous instance id.",
+  "launch_params": {
+    "session_name": "rag-qdrant",
+    "project": "RAG Example",
+    "queue_name": "${ENV:RAG_CPU_QUEUE}",
+    "container": "qdrant/qdrant:v1.13.5",
+    "container_args": null,
+    "max_idle_time_hour": "None",
+    "session_tags": "rag",
+    "continue_session": "",
+    "storage_ref_session_id": "",
+    "qdrant_user": null,
+    "network_threshold": 0.01,
+    "cpu_threshold": 10,
+    "gpu_threshold": 10
+  }
+}

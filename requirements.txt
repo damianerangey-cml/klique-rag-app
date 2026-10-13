@@ -1,0 +1,6 @@
+# Everything needed to run the pipeline, the middleware and the UI from one
+# virtualenv. Each image installs only its own file.
+-r pipeline/requirements.txt
+-r service/requirements.txt
+-r ui/requirements.txt
+-r stub/requirements.txt

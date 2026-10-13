@@ -1,0 +1,18 @@
+{
+  "app": "task-scheduler",
+  "notes": "Nightly run of the same pipeline as a safety net. Field names from task_scheduler.app.conf 1.17.1. With no changed documents the run embeds no documents and only repeats the retrieval check, so a drop in hit@k shows up without a corpus change. Times are UTC.",
+  "launch_params": {
+    "name": "RAG nightly retrieval check",
+    "project_name": [
+      {
+        "task_id": "${ENV:RAG_PIPELINE_TASK_ID}",
+        "project": "RAG Example",
+        "queue": "${ENV:RAG_SERVICES_QUEUE}",
+        "schedule_type": "Daily",
+        "dow": "Monday",
+        "monthly": null,
+        "hours": "02:00"
+      }
+    ]
+  }
+}

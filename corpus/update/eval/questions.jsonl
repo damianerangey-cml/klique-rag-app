@@ -1,0 +1,21 @@
+{"question": "How long do the batteries in a Sense S1 last?", "expected": "docs/sensors/s1-battery.md"}
+{"question": "Which firewall ports does the Hub H2 need for outbound connections?", "expected": "docs/hub/h2-network-requirements.md"}
+{"question": "What does a blinking amber status light on the hub mean?", "expected": "docs/hub/h2-led-status.md"}
+{"question": "How do I factory reset the hub?", "expected": "docs/hub/h2-factory-reset.md"}
+{"question": "How many sensors can be paired with one Hub H2?", "expected": "docs/hub/h2-specifications.md"}
+{"question": "How long are raw readings kept on the Standard plan?", "expected": "docs/cloud/data-retention.md"}
+{"question": "How many API requests per minute are allowed per API key?", "expected": "docs/cloud/api-rate-limits.md"}
+{"question": "How much does the Enterprise plan cost per month?", "expected": "docs/cloud/plans-and-pricing.md"}
+{"question": "How long is the warranty on the Hub H2?", "expected": "docs/support/warranty.md"}
+{"question": "Within how many days can unused hardware be returned for a refund?", "expected": "docs/support/returns.md"}
+{"question": "When is phone support open?", "expected": "docs/support/contact-hours.md"}
+{"question": "How often should humidity be recalibrated on a Sense S1?", "expected": "docs/sensors/s1-calibration.md"}
+{"question": "How do I install the soil moisture probe in rockwool slabs?", "expected": "docs/sensors/m3-soil-probe.md"}
+{"question": "When is an unacknowledged alert escalated to the next contact?", "expected": "docs/cloud/alert-rules.md"}
+{"question": "Is single sign-on with SAML available?", "expected": "docs/cloud/account-and-sso.md"}
+{"question": "At what time does the scheduled export to an S3 bucket run?", "expected": "docs/cloud/data-export.md"}
+{"question": "When does the hub check for new firmware?", "expected": "docs/hub/h2-firmware-updates.md"}
+{"question": "At what height should a Sense S1 be mounted?", "expected": "docs/sensors/s1-placement.md"}
+{"question": "Why does a sensor show as offline?", "expected": "docs/support/troubleshooting-offline-sensor.md"}
+{"question": "What range of carbon dioxide concentration does the Sense C4 measure?", "expected": "docs/sensors/c4-co2-sensor.md"}
+{"question": "How many times is a failed webhook delivery retried?", "expected": "docs/cloud/webhooks.md"}

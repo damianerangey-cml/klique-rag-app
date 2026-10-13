@@ -1,0 +1,31 @@
+{
+  "app": "containerlaunch",
+  "notes": "Alternative to qdrant-app.json when the Qdrant catalog app is not installed: the same image on the Containerized Application Launcher. Field names from container_launcher.app.conf 1.17.2. The launcher ignores the image entrypoint, so the command line starts Qdrant explicitly.",
+  "launch_params": {
+    "session_name": "rag-qdrant",
+    "project": "RAG Example",
+    "container": "qdrant/qdrant:v1.13.5",
+    "command_line": "./entrypoint.sh",
+    "working_dir": "/qdrant",
+    "queue_name": "${ENV:RAG_CPU_QUEUE}",
+    "router_type": "http",
+    "router_internal_port": 6333,
+    "route_name": null,
+    "max_idle_time_hour": "None",
+    "storage_session": "/qdrant/storage",
+    "environment_vars_list": [],
+    "config_files": [],
+    "run_as_root": false,
+    "disable_clearml_venv": true,
+    "continuous_console_logging": true,
+    "monitor_endpoint": true,
+    "setup_shell_script": null,
+    "container_args": null,
+    "session_tags": "rag",
+    "continue_session": "",
+    "storage_ref_session_id": "",
+    "network_threshold": 0.01,
+    "cpu_threshold": 10,
+    "gpu_threshold": 10
+  }
+}

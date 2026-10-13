@@ -1,0 +1,22 @@
+{
+  "app": "streamlit",
+  "notes": "Chat UI on the Streamlit catalog app, run from Git. Field names from streamlit.app.conf 1.17.2. The app passes each Arguments entry to the script as --<arg_name> <arg_value>, which is how ui/app.py receives the middleware address. Access to the UI follows the access rights of the project.",
+  "launch_params": {
+    "name": "rag-chat-ui",
+    "project": "RAG Example",
+    "git_url": "${ENV:RAG_GIT_REPO}",
+    "branch": "main",
+    "commit": null,
+    "entry_script": "ui/app.py",
+    "queue_name": "${ENV:RAG_CPU_QUEUE}",
+    "route_name": null,
+    "docker_image": "python:3.11-bullseye",
+    "arguments_list": [
+      {"arg_name": "api-url", "arg_value": "${ENV:RAG_MIDDLEWARE_URL}"}
+    ],
+    "requirements": "streamlit>=1.37\nhttpx>=0.27",
+    "docker_bash_setup_script": null,
+    "docker_args": null,
+    "max_idle_time_hour": "None"
+  }
+}

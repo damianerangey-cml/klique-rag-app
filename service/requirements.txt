@@ -1,0 +1,8 @@
+# Middleware image. Version floors only; pin exact versions for production builds.
+llama-index-core>=0.12
+llama-index-vector-stores-qdrant>=0.4
+llama-index-llms-openai-like>=0.3
+llama-index-embeddings-openai-like>=0.1
+qdrant-client>=1.12
+fastapi>=0.110
+uvicorn>=0.29

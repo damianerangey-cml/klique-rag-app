@@ -1,0 +1,76 @@
+# Local stack: the same four long-running pieces as on Klique, with the stub
+# standing in for the embedding and chat model endpoints.
+#
+#   docker compose up -d --build                 # qdrant, stub, middleware, UI
+#   docker compose run --rm ingest               # publish corpus v1 + run the pipeline
+#   docker compose run --rm ingest-update        # publish the update batch + re-run
+#   open http://localhost:8501                   # chat UI
+#
+# To use real models, set EMBED_BASE_URL / LLM_BASE_URL (and the keys) in the
+# environment or an .env file and remove the stub dependency.
+x-rag-env: &rag-env
+  QDRANT_URL: http://qdrant:6333
+  RAG_COLLECTION: pellwood_docs
+  EMBED_BASE_URL: ${EMBED_BASE_URL:-http://stub:9000/v1}
+  EMBED_MODEL: ${EMBED_MODEL:-embed}
+  EMBED_API_KEY: ${EMBED_API_KEY:-}
+  LLM_BASE_URL: ${LLM_BASE_URL:-http://stub:9000/v1}
+  LLM_MODEL: ${LLM_MODEL:-chat}
+  LLM_API_KEY: ${LLM_API_KEY:-}
+
+x-ingest: &ingest
+  build: {context: ., dockerfile: pipeline/Dockerfile}
+  profiles: ["tools"]
+  depends_on: [qdrant, stub]
+  volumes: ["datasets:/data"]
+  environment:
+    <<: *rag-env
+    # No Klique server locally: local dataset versions, offline task records.
+    RAG_DATASET_BACKEND: local
+    RAG_LOCAL_DATASET_ROOT: /data/datasets
+    CLEARML_OFFLINE_MODE: "1"
+    CLEARML_CACHE_DIR: /data/clearml
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.13.5        # same image as the Klique Qdrant app default
+    ports: ["${RAG_QDRANT_PORT:-6333}:6333"]
+    volumes: ["qdrant:/qdrant/storage"]
+
+  stub:
+    build: {context: ., dockerfile: stub/Dockerfile}
+    ports: ["${RAG_STUB_PORT:-9000}:9000"]
+
+  service:
+    build: {context: ., dockerfile: service/Dockerfile}
+    depends_on: [qdrant, stub]
+    ports: ["${RAG_SERVICE_PORT:-8000}:8000"]
+    environment: *rag-env
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+
+  ui:
+    build: {context: ., dockerfile: ui/Dockerfile}
+    depends_on: [service]
+    ports: ["${RAG_UI_PORT:-8501}:8501"]
+    environment:
+      RAG_API_URL: http://service:8000
+
+  ingest:
+    <<: *ingest
+    command: >
+      sh -c "python pipeline/publish_docs.py --source corpus/base &&
+             python pipeline/rag_ingest_pipeline.py --local"
+
+  ingest-update:
+    <<: *ingest
+    command: >
+      sh -c "python pipeline/publish_docs.py --source corpus/base --overlay corpus/update &&
+             python pipeline/rag_ingest_pipeline.py --local"
+
+volumes:
+  qdrant:
+  datasets:

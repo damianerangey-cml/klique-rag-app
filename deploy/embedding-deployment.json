@@ -1,0 +1,35 @@
+{
+  "app": "embedding-model-deployment",
+  "notes": "Embedding model behind an OpenAI-compatible /v1/embeddings route. Field names from embedding_model_deployment.app.conf 1.17.2. The model is an example; any embedding model the app can serve works, as long as ingestion and queries use the same one.",
+  "launch_params": {
+    "task_name": "rag-embed",
+    "project": "RAG Example",
+    "queue_name": "${ENV:RAG_GPU_QUEUE}",
+    "route_name": null,
+    "config_per_instance": [
+      {
+        "cli": null,
+        "model": "BAAI/bge-small-en-v1.5",
+        "revision": null,
+        "tokenization_workers": null,
+        "dtype": null,
+        "pooling": null,
+        "max_concurrent_requests": "10",
+        "max_batch_tokens": null,
+        "max_batch_requests": null,
+        "max_client_batch_size": "64",
+        "payload_limit": null
+      }
+    ],
+    "debug": false,
+    "enable_automatic_cpu_offloading": true,
+    "enable_disk_model_swapping": false,
+    "hf_token": null,
+    "log_level": null,
+    "max_cuda_mem": null,
+    "cuda_mem_mng_min_thr": null,
+    "environment_vars_list": [],
+    "max_idle_time_hour": "None",
+    "last_activity_report_interval_seconds": 300
+  }
+}

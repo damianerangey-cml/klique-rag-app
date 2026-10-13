@@ -1,0 +1,23 @@
+{
+  "app": "trigger-manager",
+  "notes": "Re-embed when a new corpus version is published. Field names from trigger_manager.app.conf 1.17.1. task_id is the pipeline controller task to clone; trigger_project takes a project ID (the form's value_field is id), target_project a project name. The pipeline resolves the latest dataset version by name, so no parameter override is needed.",
+  "launch_params": {
+    "name": "RAG re-embed trigger",
+    "triggers_list": [
+      {
+        "task_id": "${ENV:RAG_PIPELINE_TASK_ID}",
+        "target_project": "RAG Example",
+        "schedule_queue": "${ENV:RAG_SERVICES_QUEUE}",
+        "task_parameters": null,
+        "trigger_type": "Dataset",
+        "trigger_project": "${ENV:RAG_DATASET_PROJECT_ID}",
+        "trigger_name": "pellwood-docs",
+        "trigger_on_tags": null,
+        "trigger_required_tags": "rag-corpus",
+        "trigger_on_publish": true,
+        "trigger_on_archive": false
+      }
+    ],
+    "poll_frequency": 3.0
+  }
+}

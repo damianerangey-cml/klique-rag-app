@@ -1,0 +1,39 @@
+{
+  "app": "containerlaunch",
+  "notes": "RAG middleware as a long-running container. Field names from container_launcher.app.conf 1.17.2. Only non-secret values are listed here; LLM_API_KEY, EMBED_API_KEY and QDRANT_BEARER_TOKEN are supplied from a vault, never from launch parameters.",
+  "launch_params": {
+    "session_name": "rag-middleware",
+    "project": "RAG Example",
+    "container": "${ENV:RAG_SERVICE_IMAGE}",
+    "command_line": "uvicorn service.app:app --host 0.0.0.0 --port 8000",
+    "working_dir": "/app",
+    "queue_name": "${ENV:RAG_CPU_QUEUE}",
+    "router_type": "http",
+    "router_internal_port": 8000,
+    "route_name": null,
+    "max_idle_time_hour": "None",
+    "storage_session": null,
+    "environment_vars_list": [
+      {"env_key": "QDRANT_URL", "env_val": "${ENV:RAG_QDRANT_URL}"},
+      {"env_key": "RAG_COLLECTION", "env_val": "pellwood_docs"},
+      {"env_key": "LLM_BASE_URL", "env_val": "${ENV:RAG_GATEWAY_URL}"},
+      {"env_key": "LLM_MODEL", "env_val": "chat"},
+      {"env_key": "EMBED_BASE_URL", "env_val": "${ENV:RAG_GATEWAY_URL}"},
+      {"env_key": "EMBED_MODEL", "env_val": "embed"},
+      {"env_key": "RAG_TOP_K", "env_val": "4"}
+    ],
+    "config_files": [],
+    "run_as_root": false,
+    "disable_clearml_venv": true,
+    "continuous_console_logging": true,
+    "monitor_endpoint": true,
+    "setup_shell_script": null,
+    "container_args": null,
+    "session_tags": "rag",
+    "continue_session": "",
+    "storage_ref_session_id": "",
+    "network_threshold": 0.01,
+    "cpu_threshold": 10,
+    "gpu_threshold": 10
+  }
+}

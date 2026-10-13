@@ -1,0 +1,3 @@
+# Stub model endpoint (local runs and tests only).
+fastapi>=0.110
+uvicorn>=0.29

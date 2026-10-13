@@ -1,0 +1,41 @@
+{
+  "app": "model-deployment",
+  "notes": "Chat model on the vLLM Model Deployment app. Same field set as hands-on-labs/adapter-lifecycle/automation/multimodel-serve.json, which the apps API accepted in that lab. Skip this file when the LLM gateway alias already points at an existing chat endpoint.",
+  "launch_params": {
+    "task_name": "rag-chat",
+    "project": "RAG Example",
+    "queue_name": "${ENV:RAG_GPU_QUEUE}",
+    "route_name": null,
+    "config_per_instance": [
+      {
+        "cli": null,
+        "model": "Qwen/Qwen2.5-1.5B-Instruct",
+        "served_model_name": "rag-chat",
+        "max_model_len": "8192",
+        "max_num_seqs": "8",
+        "gpu_memory_utilization": "0.9",
+        "tensor_parallel_size": null,
+        "dtype": "auto",
+        "kv_cache_dtype": "auto",
+        "tokenizer_mode": "auto",
+        "quantization": null,
+        "max_concurrent_requests": "10",
+        "enforce_eager": false,
+        "enable_prefix_caching": true,
+        "trust_remote_code": false,
+        "model_overrides": null
+      }
+    ],
+    "enable_lora": false,
+    "use_v1_engine": true,
+    "trust_remote_code": false,
+    "hf_token": null,
+    "max_cuda_mem": null,
+    "load_format": "auto",
+    "enable_automatic_cpu_offloading": true,
+    "enable_disk_model_swapping": false,
+    "environment_vars_list": [],
+    "max_idle_time_hour": "None",
+    "last_activity_report_interval_seconds": 300
+  }
+}
